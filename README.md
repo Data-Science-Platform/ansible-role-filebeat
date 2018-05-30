@@ -26,14 +26,17 @@ Prospectors that will be listed in the `prospectors` section of the Filebeat con
     filebeat_output_elasticsearch_enabled: false
     filebeat_output_elasticsearch_hosts:
       - "localhost:9200"
+    filebeat_output_elasticsearch_worker: 1
 
-Whether to enable Elasticsearch output, and which hosts to send output to.
+Whether to enable Elasticsearch output, which hosts to send output to, and how many workers to use.
 
     filebeat_output_logstash_enabled: true
     filebeat_output_logstash_hosts:
       - "localhost:5000"
+    filebeat_output_logstash_worker: 1
+    filebeat_output_logstash_loadbalance: false
 
-Whether to enable Logstash output, and which hosts to send output to.
+Whether to enable Logstash output, which hosts to send output to, how many workers to use and whether to load balance published events onto all Logstash hosts.
 
     filebeat_enable_logging: false 
     filebeat_log_level: warning

@@ -19,7 +19,7 @@ output:
     #password: "s3cr3t"
 
     # Number of workers per Elasticsearch host.
-    #worker: 1
+    worker: {{ filebeat_output_elasticsearch_worker }}
 
     # Optional index name. The default is "filebeat" and generates
     # [filebeat-]YYYY.MM.DD keys.
@@ -95,10 +95,10 @@ output:
     hosts: {{ filebeat_output_logstash_hosts | to_json }}
 
     # Number of workers per Logstash host.
-    #worker: 1
+    worker: {{ filebeat_output_logstash_worker }}
 
     # Optional load balance the events between the Logstash hosts
-    #loadbalance: true
+    loadbalance: {{ filebeat_output_logstash_loadbalance }}
 
     # Optional index name. The default index name depends on the each beat.
     # For Packetbeat, the default is set to packetbeat, for Topbeat
