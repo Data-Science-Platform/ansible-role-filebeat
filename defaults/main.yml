@@ -27,3 +27,6 @@ filebeat_ssl_certificate_file: ""
 filebeat_ssl_key_file: ""
 filebeat_ssl_insecure: "false"
 filebeat_ssl_ca:
+
+filebeat_ssl_ca_dir: /etc/pki/logstash/ca
+filebeat_ssl_ca_basenames:
