@@ -1,7 +1,7 @@
 ---
 - name: Define filebeat_ssl_ca_dir.
   set_fact:
-    filebeat_ssl_ca_dir: "{{ filebeat_ssl_dir }}/ca"
+    filebeat_ssl_ca_dir: "{{ filebeat_ssl_dir }}/ca/"
   when: filebeat_ssl_ca
 
 - name: Define filebeat_ssl_ca_basenames.
@@ -22,7 +22,7 @@
   file:
     path: "{{ filebeat_ssl_dir }}"
     state: directory
-  when: filebeat_ssl_key_file
+  when: filebeat_ssl_key_file is defined
 
 - name: Copy SSL key and cert for filebeat.
   copy:
@@ -33,19 +33,19 @@
     - "{{ filebeat_ssl_key_file }}"
     - "{{ filebeat_ssl_certificate_file }}"
   notify: restart filebeat
-  when: filebeat_ssl_key_file and filebeat_ssl_certificate_file
+  when: filebeat_ssl_key_file is defined and filebeat_ssl_certificate_file is defined
 
 - name: Ensure Filebeat CA directory exists.
   file:
     path: "{{ filebeat_ssl_ca_dir }}"
     state: directory
-  when: filebeat_ssl_ca
+  when: filebeat_ssl_ca is defined
 
 - name: Copy CA.
   copy:
     src: "{{ item }}"
-    dest: "{{ filebeat_ssl_ca_dir }}/{{ item | basename }}"
+    dest: "{{ filebeat_ssl_ca_dir }}{{ item | basename }}"
     mode: 0644
   with_items: "{{ filebeat_ssl_ca }}"
   notify: restart filebeat
-  when: filebeat_ssl_ca
+  when: filebeat_ssl_ca is defined

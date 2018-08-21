@@ -109,7 +109,8 @@ output:
 
 {% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
     # Optional TLS. By default is off.
-    tls:
+    ssl:
+      enabled: true
       # List of root certificates for HTTPS server verifications
       {% if filebeat_ssl_ca %}
         certificate_authorities: {{ [filebeat_ssl_ca_dir] | zip_longest(filebeat_ssl_ca_basenames, fillvalue=filebeat_ssl_ca_dir) | map('join') | list | to_json }}
@@ -119,7 +120,7 @@ output:
       certificate: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"
 
       # Client Certificate Key
-      certificate_key: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_key_file | basename}}"
+      key: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_key_file | basename}}"
 
       # Controls whether the client verifies server certificates and host name.
       # If insecure is set to true, all server host names and certificates will be
