@@ -22,7 +22,7 @@
   file:
     path: "{{ filebeat_ssl_dir }}"
     state: directory
-  when: filebeat_ssl_key_file
+  when: filebeat_ssl_key_file is defined and filebeat_ssl_key_file != ''
 
 - name: Copy SSL key and cert for filebeat.
   copy:
@@ -33,7 +33,9 @@
     - "{{ filebeat_ssl_key_file }}"
     - "{{ filebeat_ssl_certificate_file }}"
   notify: restart filebeat
-  when: filebeat_ssl_key_file and filebeat_ssl_certificate_file
+  when:
+    - filebeat_ssl_key_file is defined and filebeat_ssl_key_file != ''
+    - filebeat_ssl_certificate_file is defined and filebeat_ssl_certificate_file != ''
 
 - name: Ensure Filebeat CA directory exists.
   file:
