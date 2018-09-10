@@ -62,7 +62,7 @@ output:
       enabled: true
       # List of root certificates for HTTPS server verifications
 {% if filebeat_ssl_ca %}
-        certificate_authorities: {{ [filebeat_ssl_ca_dir + "/"] | zip_longest(filebeat_ssl_ca_basenames, fillvalue=filebeat_ssl_ca_dir) | map('join') | list | to_json }}
+      certificate_authorities: {{ [filebeat_ssl_ca_dir + "/"] | zip_longest(filebeat_ssl_ca_basenames, fillvalue=filebeat_ssl_ca_dir) | map('join') | list | to_json }}
       {% endif %}
 
       # Certificate for TLS client authentication
@@ -114,7 +114,7 @@ output:
       enabled: true
       # List of root certificates for HTTPS server verifications
 {% if filebeat_ssl_ca %}
-        certificate_authorities: {{ [filebeat_ssl_ca_dir + "/"] | zip_longest(filebeat_ssl_ca_basenames, fillvalue=filebeat_ssl_ca_dir) | map('join') | list | to_json }}
+      certificate_authorities: {{ [filebeat_ssl_ca_dir + "/"] | zip_longest(filebeat_ssl_ca_basenames, fillvalue=filebeat_ssl_ca_dir) | map('join') | list | to_json }}
       {% endif %}
 
       # Certificate for TLS client authentication
